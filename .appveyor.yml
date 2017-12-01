@@ -10,6 +10,8 @@ platform:
 - x86
 - x64
 
+skip_non_tags: true
+
 install:
   - cd c:\projects\sc
   - mkdir build
@@ -22,6 +24,9 @@ build_script:
   - cmake -DBUILD_SHARED_LIBS=OFF .
   - cmake --build .
   
+artifacts:
+  - path: '**\*.lib'
+    
 deploy:
   provider: GitHub
   artifact: /.*\.lib/    
