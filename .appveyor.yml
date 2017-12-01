@@ -30,6 +30,7 @@ deploy:
     auth_token:
     secure: WCGi6SXwa6VaPyLH6fZCrmTix+e2FA3zwzhNg8dSf3EdrcecGIR3Z0qG/vssOdfA
     force_update: true
+    tag: $(appveyor_repo_tag_name)
     on:
       branch: master                # release from master branch only
       appveyor_repo_tag: true       # deploy on tag push only
