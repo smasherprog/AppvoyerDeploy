@@ -1,11 +1,13 @@
 image: Visual Studio 2017
 
 configuration:
+  - Debug
   - Relase 
   
 clone_folder: c:\projects\sc
 
 platform:
+- x86
 - x64
 
 skip_non_tags: true
@@ -15,9 +17,25 @@ install:
   - mkdir build
   - cd build
   - ps: Install-Product node 9.2.0
-  
+  - cmake -G "Visual Studio 15 2017" ..
+
 build_script:
-  - npm install -g @angular/cli
+  - cmake -DBUILD_SHARED_LIBS=ON .
+  - cmake --build .
+  - cmake -DBUILD_SHARED_LIBS=OFF .
+  - cmake --build .
   
+artifacts:
+  - path: '**\*.lib'
+    
+deploy:
+  provider: GitHub
+  artifact: /.*\.lib/    
+  draft: false
+  prerelease: false
+  auth_token:
+    secure: WCGi6SXwa6VaPyLH6fZCrmTix+e2FA3zwzhNg8dSf3EdrcecGIR3Z0qG/vssOdfA
+  on:
+    appveyor_repo_tag: true       # deploy on tag push only
 
       
