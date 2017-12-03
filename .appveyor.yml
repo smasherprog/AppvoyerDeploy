@@ -14,7 +14,8 @@ install:
   - cd c:\projects\sc
   - mkdir build
   - cd build
-
+  - ps: Install-Product node 9.2.0
+  
 build_script:
   - npm install -g @angular/cli
   
